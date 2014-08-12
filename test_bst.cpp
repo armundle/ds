@@ -18,4 +18,7 @@ int main()
 
 	b.printInOrder();
 	b.printPostOrder();
+
+	std::cout << "Tree size = " << b.size() << std::endl;
+	std::cout << "Max Depth = " << b.maxDepth() << std::endl;
 }

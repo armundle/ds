@@ -27,39 +27,27 @@ class BST{
 
 	void insert(node* r, node* n)
 	{
-
-		if(r == NULL)
+	  if(r == NULL)
 		{
 			r = n;
 			return;
 		}
-		
 		if(r->key > n->key)
 		{
 			if(r->left)
-			{
 				insert(r->left, n);
-			}
 			else
-			{
 				r->left = n;
-			}
 			return;
 		}
 		else
 		{
 			if(r->right)
-			{
 				insert(r->right, n);
-			}
 			else
-			{
 				r->right = n;
-				
-			}
 			return;
 		}
-
 	}
 
 	void inOrder(node* n)
@@ -81,6 +69,48 @@ class BST{
 		inOrder(n->left);
 		inOrder(n->right);
 	}
+
+	unsigned int sizeTree(node* node)
+	{
+		if(node==NULL)
+			return 0;
+
+		unsigned int size = 1;
+		if(node->left)
+			size = size + sizeTree(node->left);
+
+		if(node->right)
+			size = size + sizeTree(node->right);
+
+		return size;
+	}
+
+	unsigned int maxDepthTree(node* n)
+	{
+		if(n == NULL)
+			return 0;
+
+		unsigned int d = 1;
+
+		if(n->left && n->right)
+		{
+			unsigned int ld = maxDepthTree(n->left);
+			unsigned int rd = maxDepthTree(n->right);
+			return ((ld >= rd ) ? d + ld : d + rd);
+		}
+
+		else if (n->left && !n->right)
+		{
+			return (d + maxDepthTree(n->left));
+		}
+		else if (n->right && !n->left)
+		{
+			return (d + maxDepthTree(n->right));
+		}
+		else
+			return d;
+	}
+
 	
 	public:
 
@@ -92,6 +122,8 @@ class BST{
 	int getMax();
 	void printInOrder();
 	void printPostOrder();
+	unsigned int size();
+	unsigned int maxDepth();
 
 };
 #endif //BST_H_
@@ -126,7 +158,7 @@ int BST::getMin()
 {
 	if(root == NULL)
 	{
-		return INT_MIN;
+		return 0;
 	}
 	
 	node* currentNode = root;
@@ -140,10 +172,9 @@ int BST::getMin()
 }
 
 int BST::getMax()
-{
-	if(root == NULL)
+{ if(root == NULL)
 	{
-		return INT_MAX;
+		return 0;
 	}
 	
 	node* currentNode = root;
@@ -170,4 +201,21 @@ void BST::printPostOrder()
 		return;
 	
 	postOrder(root);
+}
+
+unsigned int BST::size()
+{
+	if(root == NULL)
+		return 0;
+
+	return sizeTree(root);
+
+}
+
+unsigned int BST::maxDepth()
+{
+	if(root == NULL)
+		return 0;
+
+	return maxDepthTree(root);
 }
