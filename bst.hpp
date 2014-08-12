@@ -27,11 +27,6 @@ class BST{
 
 	void insert(node* r, node* n)
 	{
-	  if(r == NULL)
-		{
-			r = n;
-			return;
-		}
 		if(r->key > n->key)
 		{
 			if(r->left)
@@ -111,6 +106,29 @@ class BST{
 			return d;
 	}
 
+	bool hasPathSumTree(node* node, int sum)
+	{
+		if(node->left == NULL && node->right == NULL)
+		{
+			if(node->key == sum)
+			{
+				return true;
+			}
+			else
+				return false;
+		}
+		if(node->left)
+		{
+			if(hasPathSumTree(node->left, sum - node->key))
+				return true;
+		}
+		if(node->right)
+		{
+				return hasPathSumTree(node->right, sum - node->key);
+		}
+		
+	}
+
 	
 	public:
 
@@ -124,6 +142,7 @@ class BST{
 	void printPostOrder();
 	unsigned int size();
 	unsigned int maxDepth();
+	bool hasPathSum(int sum);
 
 };
 #endif //BST_H_
@@ -218,4 +237,12 @@ unsigned int BST::maxDepth()
 		return 0;
 
 	return maxDepthTree(root);
+}
+
+bool BST::hasPathSum(int sum)
+{
+	if(root == NULL)
+		return false;
+
+	return hasPathSumTree(root,sum);
 }
