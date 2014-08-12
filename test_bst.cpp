@@ -11,6 +11,7 @@ int main()
 	b.add(5);
 	b.add(1);
 	b.add(2);
+	b.add(6);
 
 	std::cout << "min: " << b.getMin() << std::endl;
 	std::cout << "max: " << b.getMax() << std::endl;
