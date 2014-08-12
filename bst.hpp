@@ -71,6 +71,16 @@ class BST{
 		std::cout << n->key << std::endl;
 		inOrder(n->right);
 	}
+
+	void postOrder(node* n)
+	{
+		if(n == NULL)
+			return;
+
+		std::cout << n->key << std::endl;
+		inOrder(n->left);
+		inOrder(n->right);
+	}
 	
 	public:
 
@@ -81,6 +91,7 @@ class BST{
 	int getMin();
 	int getMax();
 	void printInOrder();
+	void printPostOrder();
 
 };
 #endif //BST_H_
@@ -151,5 +162,12 @@ void BST::printInOrder()
 		return;
 	
 	inOrder(root);
+}
+
+void BST::printPostOrder()
+{
+	if(root == NULL)
+		return;
 	
+	postOrder(root);
 }
