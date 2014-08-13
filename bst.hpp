@@ -127,6 +127,7 @@ class BST{
 				return hasPathSumTree(node->right, sum - node->key);
 		}
 		
+		return false;
 	}
 
 	void printPaths(node* node, int path[], int length)
@@ -162,6 +163,38 @@ class BST{
 		std::cout << std::endl;
 	}
 
+	void mirrorBST(node* n)
+	{
+		if(n == NULL)
+			return;
+
+		node* nSwap = NULL;
+		nSwap = n->left;
+		n->left = n->right;
+		n->right = nSwap;
+
+		mirrorBST(n->left);
+		mirrorBST(n->right);
+
+		return;
+	}
+
+	void duplicateBST(node* n)
+	{
+		if(n == NULL)
+			return;
+
+		duplicateBST(n->left);
+		duplicateBST(n->right);
+
+		node* nDuplicate = createNode(n->key);
+		node* nTemp = n->left;
+		n->left = nDuplicate;
+		nDuplicate->left = nTemp;
+
+		return;
+	}
+
 	
 	public:
 
@@ -177,6 +210,8 @@ class BST{
 	unsigned int maxDepth();
 	bool hasPathSum(int sum);
 	void printAllPaths();
+	void mirror();
+	void duplicate();
 
 };
 #endif //BST_H_
@@ -290,4 +325,21 @@ void BST::printAllPaths()
 	int length = 0;
 	
 	printPaths(root, path, length);
+}
+
+void BST::mirror()
+{
+	if(root == NULL)
+		return;
+
+	mirrorBST(root);
+}
+
+void BST::duplicate()
+{
+	if(root == NULL)
+		return;
+
+	duplicateBST(root);
+
 }

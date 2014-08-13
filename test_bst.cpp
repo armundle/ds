@@ -31,4 +31,14 @@ int main()
 
 	std::cout << "All the paths in the tree:" << std::endl;
 	b.printAllPaths();
+
+
+	//std::cout << "Mirror the tree ... " << std::endl;
+	//b.mirror();
+	//b.printAllPaths();
+
+
+	std::cout << "Duplicating the tree ..." << std::endl;
+	b.duplicate();
+	b.printAllPaths();
 }
