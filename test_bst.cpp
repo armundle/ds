@@ -28,4 +28,7 @@ int main()
 	std::cout << "Tree has sum 5: " << b.hasPathSum(5) << std::endl;
 	std::cout << "Tree has sum 9: " << b.hasPathSum(9) << std::endl;
 	std::cout << "Tree has sum 15: " << b.hasPathSum(15) << std::endl;
+
+	std::cout << "All the paths in the tree:" << std::endl;
+	b.printAllPaths();
 }

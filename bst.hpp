@@ -129,6 +129,39 @@ class BST{
 		
 	}
 
+	void printPaths(node* node, int path[], int length)
+	{
+		 path[length] = node->key;
+		 length++;
+
+		 //Leaf node
+		 if(!node->left && !node->right)
+		 {
+		 	printArray(path, length);
+			return;
+		 }
+
+		if(node->left)
+		{
+			printPaths(node->left, path, length);
+		}
+		if(node->right)
+		{
+			printPaths(node->right, path, length);
+		}
+
+		return;
+	}
+
+	void printArray(int path[], int length)
+	{
+		for(int i = 0; i < length; i++)
+		{
+			std::cout << path[i] << " ->";
+		}
+		std::cout << std::endl;
+	}
+
 	
 	public:
 
@@ -143,6 +176,7 @@ class BST{
 	unsigned int size();
 	unsigned int maxDepth();
 	bool hasPathSum(int sum);
+	void printAllPaths();
 
 };
 #endif //BST_H_
@@ -164,7 +198,7 @@ void BST::add(int key)
 		root = createNode(key);
 		return;
 	}
-	
+
 	node* n = createNode(key);
 
 	insert(root, n);
@@ -245,4 +279,15 @@ bool BST::hasPathSum(int sum)
 		return false;
 
 	return hasPathSumTree(root,sum);
+}
+
+void BST::printAllPaths()
+{
+	if(root == NULL)
+		return;
+
+	int path[1000];
+	int length = 0;
+	
+	printPaths(root, path, length);
 }
