@@ -4,14 +4,15 @@
 
 #include <iostream>
 
-class BST{
-	
-	private:
 		struct node{
 		int key;
 		node* left;
 		node* right;
 		};
+
+class BST{
+	
+	private:
 
 	node* root;
 
