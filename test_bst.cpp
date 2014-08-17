@@ -33,9 +33,9 @@ int main()
 	b.printAllPaths();
 
 
-	//std::cout << "Mirror the tree ... " << std::endl;
-	//b.mirror();
-	//b.printAllPaths();
+	std::cout << "Mirror the tree ... " << std::endl;
+	b.mirror();
+	b.printAllPaths();
 
 
 	std::cout << "Duplicating the tree ..." << std::endl;

@@ -160,7 +160,7 @@ class BST{
 		{
 			std::cout << path[i] << " ->";
 		}
-		std::cout << std::endl;
+		std::cout << " X" << std::endl;
 	}
 
 	void mirrorBST(node* n)
