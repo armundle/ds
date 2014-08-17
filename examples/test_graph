@@ -1,0 +1,9 @@
+#include "../src/graph.hpp"
+
+int main(void)
+{
+	Graph g;
+	
+	return 0;
+}
+
