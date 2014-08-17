@@ -3,6 +3,7 @@
 #define GRAPH_H_
 
 #include <forward_list>
+#include <iostream>
 
 class Graph{
 
@@ -115,7 +116,7 @@ int Graph::addEdge(int i, int j, int w)
 	index = 0;
 	while(index < j)
 	{
-		vi = vi->next;
+		vj = vj->next;
 		index++;
 	}//vj points to the jth vertex
 
