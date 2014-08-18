@@ -36,9 +36,6 @@ class Graph{
 		newV->value = value;
 		newV-> next = NULL;
 		newV->visited = 0;
-		//newV->cEdge = new(e);
-		//newV->cEdge->pV = NULL;
-		//newV->cEdge->w = 0;
 
 		return newV;
 	}
@@ -52,6 +49,22 @@ class Graph{
 		return newE;
 	}
 
+	void unmarkAllVisited()
+	{
+		if(root == NULL)
+			return;
+		v* current = root;
+
+		while(current)
+		{
+			current->visited = 0;
+			current = current->next;
+		}
+
+	}
+
+	int isReachableGraph(v* i, v* j);
+
 	int _nVertices;
 	int _mEdges;
 
@@ -61,8 +74,10 @@ class Graph{
 	~Graph();
 	void addVertex(int value);
 	int addEdge(int i, int j, int w);
+	int isReachable(int j);
 	int getNumberOfVertices();
 	int getNumberOfEdges();
+	void printAllVertices();
 };
 
 //Implementation
@@ -82,7 +97,11 @@ Graph::~Graph()
 void Graph::addVertex(int value)
 {
 	if(root == NULL)
+	{
 		root = newVertex(value);
+		_nVertices++;
+		return;
+	}
 	
 	v* currentVertex = root;
 	while(currentVertex->next)
@@ -119,7 +138,7 @@ int Graph::addEdge(int i, int j, int w)
 		vj = vj->next;
 		index++;
 	}//vj points to the jth vertex
-
+	
 	//since source, target, w
 	e* edge = newEdge(vj,w);
 	vi->cEdge.push_front(edge);
@@ -128,6 +147,61 @@ int Graph::addEdge(int i, int j, int w)
 
 	return 1;
 
+}
+
+int Graph::isReachable(int j)
+{
+	if(j >= _nVertices)
+		return 0;
+
+	unmarkAllVisited();
+
+	int index = 0;
+	v* vj = root;
+
+	while(index < j)
+	{
+		vj = vj->next;
+		index++;
+	}
+
+	return isReachableGraph(root, vj);
+
+}
+
+int Graph::isReachableGraph(v* vi, v* vj)
+{
+	//if the vertex has already been visited, fail
+	if(vi->visited)
+		return 0;
+	vi->visited = 1;
+	//if this is the vertex we are looking for, return success
+	if(vi == vj)
+		return 1;
+	//if this vertex does not have any edge, return fail
+	if(vi->cEdge.empty())
+		return 0;
+	
+	
+	std::forward_list<e*>::iterator it;
+
+	for ( it = vi->cEdge.begin(); it != vi->cEdge.end(); it++ )
+	{
+		if(isReachableGraph((*it)->pV, vj))
+			return 1;
+	}
+	return 0;
+
+}
+
+void Graph::printAllVertices()
+{
+	v* current = root;
+	while(current)
+	{
+		std::cout << current->value << std::endl;
+		current = current->next;
+	}
 }
 
 int Graph::getNumberOfVertices()
