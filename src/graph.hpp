@@ -78,6 +78,8 @@ class Graph{
 	int getNumberOfVertices();
 	int getNumberOfEdges();
 	void printAllVertices();
+	int DFS(int i);
+	int BFS(int i);
 };
 
 //Implementation
