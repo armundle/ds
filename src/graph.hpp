@@ -63,6 +63,34 @@ class Graph{
 
 	}
 
+	int DFSSearch(v* vi, int i)
+	{
+		std::cout << "Visiting node " << vi->value << std::endl;
+		if(vi->visited)
+			return 0;
+		
+		vi->visited = 1;
+
+		if(vi->value == i)
+			return 1;
+
+		std::forward_list<e*>::iterator it;
+
+		for ( it = vi->cEdge.begin(); it != vi->cEdge.end(); it++ )
+		{
+			std::cout << "Might visit " << ((*it)->pV)->value << std::endl;
+			if(!((*it)->pV)->visited){
+				std::cout << "Going to visit " << ((*it)->pV)->value << std::endl;
+				if(DFSSearch((*it)->pV, i))
+					return 1;
+				}
+		}
+
+		return 0;
+	}
+			
+
+
 	int isReachableGraph(v* i, v* j);
 
 	int _nVertices;
@@ -214,6 +242,27 @@ int Graph::getNumberOfVertices()
 int Graph::getNumberOfEdges()
 {
 	return _mEdges;
+}
+
+int Graph::DFS(int i)
+{
+	if(root == NULL)
+		return 0;
+
+	unmarkAllVisited();
+
+	v* current = root;
+	while(current)
+	{
+		if(DFSSearch(current, i))
+			return 1;
+
+		current = current->next;
+	}
+
+	return 0;
+
+
 }
 	
 #endif //GRAPH__H
