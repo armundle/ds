@@ -31,6 +31,7 @@ int main(void)
 	std::cout << g.isReachable(2) << std::endl;
 
 	std::cout << "Key 9 is present in the graph = " << g.DFS(9) << std::endl;
+	std::cout << "BFS traversal = " << g.BFS(0) << std::endl;
 	
 	return 0;
 }

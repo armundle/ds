@@ -3,6 +3,7 @@
 #define GRAPH_H_
 
 #include <forward_list>
+#include <queue>
 #include <iostream>
 
 class Graph{
@@ -261,8 +262,66 @@ int Graph::DFS(int i)
 	}
 
 	return 0;
+}
 
+int Graph::BFS(int i)
+{
+	if(root == NULL)
+		return 0;
+
+	unmarkAllVisited();
+
+	v* vi = root;
+
+	v* current = vi;
+
+	while(current)
+	{
+
+			
+			if(!current->visited)
+			{
+			  vi = current;
+			  std::queue<v*> vQ;
+			  vQ.push(vi);
+
+			  while(!vQ.empty())
+			  {
+			  
+						 vi = vQ.front();
+
+						 if(vi->value == i)
+						 	return 1;
+
+						 vQ.pop();
+
+						 if(vi->visited)
+						  continue;
+
+						 std::cout << "at vertex " << vi->value << std::endl;
+						 vi->visited = 1;
+						 std::forward_list<e*>::iterator it;
+						 for ( it = vi->cEdge.begin(); it != vi->cEdge.end(); it++ )
+						 {
+							 if(!((*it)->pV)->visited)
+							 {
+								 vQ.push((*it)->pV);
+							 }
+
+						 }
+			  }
+			  }
+
+				current = current->next;
+		}
+
+	return 0;
 
 }
+
+
+
+
+
 	
 #endif //GRAPH__H
