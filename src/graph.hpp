@@ -318,10 +318,4 @@ int Graph::BFS(int i)
 	return 0;
 
 }
-
-
-
-
-
-	
 #endif //GRAPH__H
